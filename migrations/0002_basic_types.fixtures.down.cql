@@ -1,0 +1,1 @@
+TRUNCATE basic_types;

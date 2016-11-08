@@ -1,0 +1,5 @@
+gocql-debug
+*.swp
+*.bak
+
+.vagrant
