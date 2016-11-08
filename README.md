@@ -4,7 +4,7 @@
 ## Dependencies
 
 * Go >= 1.7.0
-* Vagrant >= 1.8.x
+* Vagrant >= 1.8.x (+VirtualBox)
 
 
 ## Run
