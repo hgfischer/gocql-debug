@@ -9,6 +9,8 @@ import (
 	"github.com/gocql/gocql"
 )
 
+const ReuseMap = true
+
 func main() {
 	bIP, err := ioutil.ReadFile("VagrantBoxIP")
 	if err != nil {
@@ -30,19 +32,25 @@ func main() {
 		log.Fatal(err)
 	}
 
-	iter := session.Query("SELECT * FROM basic_types LIMIT 5").Iter()
+	iter := session.Query("SELECT * FROM basic_types LIMIT 100").Iter()
 	basicValues := map[string]interface{}{}
 	for iter.MapScan(basicValues) {
 		log.Println(basicValues)
+		if !ReuseMap {
+			basicValues = map[string]interface{}{}
+		}
 	}
 	if err := iter.Close(); err != nil {
 		log.Println(err)
 	}
 
-	iter = session.Query("SELECT * FROM collection_types LIMIT 5").Iter()
+	iter = session.Query("SELECT * FROM collection_types LIMIT 100").Iter()
 	collectionValues := map[string]interface{}{}
 	for iter.MapScan(collectionValues) {
 		log.Println(collectionValues)
+		if !ReuseMap {
+			collectionValues = map[string]interface{}{}
+		}
 	}
 	if err := iter.Close(); err != nil {
 		log.Println(err)
